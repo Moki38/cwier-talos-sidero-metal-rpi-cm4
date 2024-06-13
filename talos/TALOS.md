@@ -23,3 +23,33 @@ spec:
       value: /dev/mmcblk0
 ```
 
+## Exclude sidero-system from PodSecurity
+```
+talosctl edit machineconfig -n 192.168.90.50
+```
+
+## Testing Configuration
+```
+curl http://192.168.90.50:8081/configdata?uuid=$SERVER_UUID
+```
+
+## Edit sidero-controller-manager
+```
+kubectl -n sidero-system edit deployments.apps sidero-controller-manager 
+```
+
+## kubectl get servers -o wide
+```
+NAME                                   HOSTNAME             BMC IP   ACCEPTED   CORDONED   ALLOCATED   CLEAN   POWER   AGE
+00c03141-0000-0000-0000-d83add0621c6   node92.belni.local            false                                     on      9h
+00d03141-0000-0000-0000-d83add641b84   node93.belni.local            false                                     on      9h
+00d03141-0000-0000-0000-d83add641cc0   node91.belni.local            false                                     on      9h
+00d03141-0000-0000-0000-d83add641cc6   node95.belni.local            false                                     on      9h
+00d03141-0000-0000-0000-d83add641cd8   node96.belni.local            false                                     on      9h
+00d03141-0000-0000-0000-d83add641d0b   node94.belni.local            false                                     on      9h
+```
+
+## Accept servers
+```
+kubectl patch server 00000000-0000-0000-0000-d05099d33360 --type='json' -p='[{"op": "replace", "path": "/spec/accepted", "value": true}]'
+```
