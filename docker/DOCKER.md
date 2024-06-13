@@ -92,11 +92,11 @@ podman run -it --rm --name certbot -v "/data/letsencrypt/config:/etc/letsencrypt
 
 ## Promtail
 ```
-docker run --name promtail -d -v /data/loki/config:/mnt/config -v /var/log:/var/log --link loki grafana/promtail:3.0.0 -config.file=/mnt/config/promtail-config.yaml
+docker run --restart always --name promtail -d -v /data/loki/config:/mnt/config -v /var/log:/var/log --link loki grafana/promtail:3.0.0 -config.file=/mnt/config/promtail-config.yaml
 ```
 
 ## Loki
 ```
-docker run --name loki -d -v /data/loki/config:/mnt/config -p 3100:3100 grafana/loki:3.0.0 -config.file=/mnt/config/loki-config.yaml
+docker run --restart always --name loki -d -v /data/loki/config:/mnt/config -p 3100:3100 grafana/loki:3.0.0 -config.file=/mnt/config/loki-config.yaml
 ```
 
