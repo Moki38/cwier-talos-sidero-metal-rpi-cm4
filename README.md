@@ -25,6 +25,7 @@ This repo is just my things for building my Talos Linux / Sidero Metal setup on 
 │ node95           │ CM4 4Gb eMMC (32Gb)    │ d8:3a:dd:64:1c:c6 │ 7eb56880 │ Controlplane │ 192.168.90.95  │ Talos Linux       │
 │ node96           │ CM4 4Gb eMMC (32Gb)    │ d8:3a:dd:64:1c:d8 │ 43f32a64 │ Controlplane │ 192.168.90.96  │ Talos Linux       │
 └──────────────────┴────────────────────────┴───────────────────┴──────────┴──────────────┴────────────────┴───────────────────┘
+```
 
 ## Router Setup Node
 [Linux setup](router/ROUTER.md)
