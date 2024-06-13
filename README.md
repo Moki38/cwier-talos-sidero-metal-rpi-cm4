@@ -6,7 +6,6 @@ My Raspberry PI (CM4) development cluster (Talos Linux/Sidero Metal)
 This repo is just my things for building my Talos Linux / Sidero Metal setup on Raspberry PI CM4
 
 ## Hardware
-
 [Hardware used in this project](hardware/HARDWARE.md)
 
 ## Hardware Details
