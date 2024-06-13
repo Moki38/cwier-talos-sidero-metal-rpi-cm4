@@ -48,10 +48,9 @@ This repo is just my things for building my Talos Linux / Sidero Metal setup on 
 ## Talos Linux Cluster
 [Talos Linux Cluster setup](talos/TALOS.md)
 
-# Links
+## Links
 
-[!IMPORTANT]
-Disclaimer 
+## Disclaimer 
 This is my setup, running om my hardware.
 You might find this usefull (you are welcome) or useless (i don't care).
 The code may contain password, emails addresses, serials and is as such not secure!!! (use at your own risk)
