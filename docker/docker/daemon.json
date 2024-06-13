@@ -1,0 +1,14 @@
+{
+    "experimental": "true
+    "dns": [
+        "8.8.8.8",
+        "8.8.4.4"
+    ],
+    "metrics-addr": "192.168.90.40:9323",
+    "log-driver": "json-file",
+    "log-opts": {
+        "max-size": "25m",
+        "max-file": "5",
+        "compress": "true"
+    }
+}
