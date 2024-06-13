@@ -52,10 +52,10 @@ This repo is just my things for building my Talos Linux / Sidero Metal setup on 
 
 # Links
 
-# [!IMPORTANT] Disclaimer 
-This is my setup, running om my hardware.
-You might find this usefull (you are welcome) or useless (i don't care).
-The code may contain password, emails addresses, serials and is as such not secure!!! (use at your own risk)
-
-Eric van Dijken <eric@cwier.nl>
+> [!IMPORTANT] Disclaimer 
+> This is my setup, running om my hardware.
+> You might find this usefull (you are welcome) or useless (i don't care).
+> The code may contain password, emails addresses, serials and is as such not secure!!! (use at your own risk)
+>
+> Eric van Dijken <eric@cwier.nl>
 
