@@ -1,0 +1,25 @@
+$ORIGIN belni.local.  ; designates the start of this zone file in the namespace
+$TTL 1h               ; default expiration time of all resource records without their own TTL value
+@ IN SOA ns.belni.local. router.belni.local. (
+                                  2024061302     ; Serial
+                                  1d             ; Refresh
+                                  2h             ; Retry
+                                  4w             ; Expire
+                                  1h)            ; Minimum TTL
+@                 IN  A       192.168.50.40       ; Local IPv4 address for example.com.
+@                 IN  NS      ns.belni.local.    ; Name server for example.com.
+ns                IN  CNAME   @                  ; Alias for name server (points to belni.local.)
+
+router-cwier      IN  A       192.168.90.40         ; 
+sidero-cwier      IN  A       192.168.90.50         ; 
+node91            IN  A       192.168.90.91         ; 
+node92            IN  A       192.168.90.92         ;
+node93            IN  A       192.168.90.93         ;
+node94            IN  A       192.168.90.94         ; 
+node95            IN  A       192.168.90.95         ; 
+node96            IN  A       192.168.90.96         ; 
+
+belni-s3          IN  A       192.168.60.140        ; 
+
+ns                IN  CNAME   router-router-cwier   ; 
+
