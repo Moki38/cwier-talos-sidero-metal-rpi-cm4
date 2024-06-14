@@ -24,11 +24,32 @@ customization:
 factory.talos.dev/installer/86c5da69b80b298eab89fa6024337fa7ca7702584fd1344d167a08a0abbc6a2f:v1.7.4
 ```
 
+# Talos Linux single node boot server
+```
+export SIDERO_ENDPOINT=192.168.90.50
+
+talosctl gen config --config-patch='[{"op": "add", "path": "/cluster/allowSchedulingOnControlPlanes", "value": true},{"op": "replace", "path": "/machine/install/disk", "value": "/dev/mmcblk0"}]' rpi4-sidero https://${SIDERO_ENDPOINT}:6443/
+
+Fix: Add "cabpt-system" and "sidero-system" to /cluster/apiServer/
+
+talosctl apply-config --insecure -n ${SIDERO_ENDPOINT} -f controlplane.yaml
+
+talosctl config merge talosconfig
+
+talosctl config endpoints ${SIDERO_ENDPOINT}
+talosctl config nodes ${SIDERO_ENDPOINT}
+
+talosctl bootstrap
+
+talosctl kubeconfig
+
+kubectl get nodes
+```
+
 # Sidero Metal
 ```
 export SIDERO_IP=192.168.90.50
-
-SIDERO_CONTROLLER_MANAGER_HOST_NETWORK=true SIDERO_CONTROLLER_MANAGER_DEPLOYMENT_STRATEGY=Recreate SIDERO_CONTROLLER_MANAGER_API_ENDPOINT=${SIDERO_IP} clusterctl init -i sidero -b talos -c talos
+SIDERO_CONTROLLER_MANAGER_IPMI_PXE_METHOD='uefi' SIDERO_CONTROLLER_MANAGER_DISABLE_DHCP_PROXY=true SIDERO_CONTROLLER_MANAGER_HOST_NETWORK=true SIDERO_CONTROLLER_MANAGER_DEPLOYMENT_STRATEGY=Recreate SIDERO_CONTROLLER_MANAGER_API_ENDPOINT=${SIDERO_IP} clusterctl init -i sidero -b talos -c talos
 
 watch -n 2 kubectl get pods -A
 
@@ -211,7 +232,7 @@ make[2]: Entering directory '/root/cwier-talos-omni/talos/pkgs/pkgs'
  => => exporting manifest sha256:45e302e57ddd75a59340c44c9d7b4c934b422a6fda511c284eb9260ddb5cef0b                                                                     0.0s
  => => exporting config sha256:1ffaea299a40072c8ffb404e5590c81ec048a47a1e693fd350772090df6d3475                                                                       0.0s
  => => pushing layers                                                                                                                                                 1.9s
- => => pushing manifest for docker.io/moki38/raspberrypi4-uefi:latest@sha256:45e302e57ddd75a59340c44c9d7b4c934b422a6fda511c284eb9260ddb5cef0b                         0.5s
+ => => pushing manifest for docker.io/moki38/raspberrypi4-uefi:v1.8.0-alpha.0-27-ge5990e8@sha256:45e302e57ddd75a59340c44c9d7b4c934b422a6fda511c284eb9260ddb5cef0b     0.5s
  => [auth] moki38/raspberrypi4-uefi:pull,push token for registry-1.docker.io                                                                                          0.0s
 ```
 
@@ -225,7 +246,7 @@ spec:
         - name: tftp-folder
           emptyDir: {}
       initContainers:
-      - image: docker.io/moki38/raspberrypi4-uefi:latest
+      - image: docker.io/moki38/raspberrypi4-uefi:v1.8.0-alpha.0-27-ge5990e8
         imagePullPolicy: Always
         name: tftp-folder-setup
         command:
@@ -245,7 +266,7 @@ spec:
 EOF
 ```
 
-## Apllay the patch-metal
+## Apply the patch-metal
 ```
 kubectl -n sidero-system patch deployments.apps sidero-controller-manager --patch "$(cat patch-metal.yaml)"
 
@@ -271,3 +292,10 @@ NAME                                   HOSTNAME             BMC IP   ACCEPTED   
 00d03141-0000-0000-0000-d83add641d0b   node94.belni.local            false                                     on      72s
 ```
 
+
+## Reset Boot node
+```
+talosctl -n 192.168.90.50 reset --graceful=false --reboot --system-labels-to-wipe STATE --system-labels-to-wipe EPHEMERAL
+rm -f /root/.kube/config
+rm -f /root/.talos/confi
+```

@@ -1,0 +1,5 @@
+apiVersion: metal.sidero.dev/v1alpha2
+kind: Server
+spec:
+  bootFromDiskMethod: ipxe-sanboot
+
